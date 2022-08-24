@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
 	} catch (error) {
 		res
 			.status(500)
-			.json(
+			.send(
 				`There was an error with obtaining all categories with thier products: ${error}`
 			);
 	}
@@ -30,7 +30,7 @@ router.get('/:id', async (req, res) => {
 	} catch (error) {
 		res
 			.status(500)
-			.json(
+			.send(
 				`There was an error obtaining that specific category and related products: ${error}`
 			);
 	}
@@ -55,13 +55,13 @@ router.put('/:id', async (req, res) => {
 		});
 		res
 			.status(200)
-			.send(
+			.json(
 				`Successfully updated category ${req.params.id} to ${info.category_name}`
 			);
 	} catch (error) {
 		res
 			.status(500)
-			.json(`Failed to update category ${req.params.id}: ${error}`);
+			.send(`Failed to update category ${req.params.id}: ${error}`);
 	}
 });
 
@@ -73,7 +73,7 @@ router.delete('/:id', async (req, res) => {
 		});
 		res.status(200).send(`Succesfully deleted category ${req.params.id}`);
 	} catch (error) {
-		res.status(500).json(`Deletion of category failed: ${error}`);
+		res.status(500).send(`Deletion of category failed: ${error}`);
 	}
 });
 
