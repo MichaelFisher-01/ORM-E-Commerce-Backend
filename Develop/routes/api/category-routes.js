@@ -38,6 +38,11 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
 	// create a new category
+	/* req.body should look like this...
+    {
+      category_name: "New_Name"
+    }
+  */
 	try {
 		const newCategory = await Category.create(req.body);
 		res.status(200).json(newCategory);
@@ -71,7 +76,7 @@ router.delete('/:id', async (req, res) => {
 		const deletedCategory = await Category.destroy({
 			where: { id: req.params.id },
 		});
-		res.status(200).send(`Succesfully deleted category ${req.params.id}`);
+		res.status(200).json(`Succesfully deleted category ${req.params.id}`);
 	} catch (error) {
 		res.status(500).send(`Deletion of category failed: ${error}`);
 	}
